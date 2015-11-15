@@ -1,0 +1,13 @@
+= HUMCOM Libs.
+HUMCOM Libs. is XPages library to make XPages Application.
+
+= Installation
+Copy JSS Files to your XPages Application's ScriptLibraries Folder.
+
+
+
+= Author
+notesgrip@tech-notes.dyndns.org
+
+= License
+MIT
