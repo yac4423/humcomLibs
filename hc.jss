@@ -1,4 +1,4 @@
-// HUMCOM Base Library Ver.0.00    2015/09/16
+// HUMCOM Base Library Ver.0.10    2015/11/15
 // Copyright (C) 2015 Yac <humcom@tech-notes.dyndns.org>
 // This software is released under the MIT License, see LICENSE.txt.
 
