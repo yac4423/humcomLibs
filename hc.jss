@@ -44,52 +44,36 @@ sessionScope.humcom = sessionScope.humcom || {};
     }
   }
   
-  // This Code was copied from follow GitHub.
-  // https://github.com/ebi311/Jalapeno/blob/master/Code/ScriptLibraries/RitsCommon_JSS.jss
-  /** 
-   * @fileOverview
-   * @author Copyrightc Ricoh IT Solutions Co.,Ltd. All Rights Reserved.<a href="Kenji.Ebihara@jrits.ricoh.co.jp">EBIHARA Kenji</a> 
-   * @version 1.0.0
-   */
-   $hc.toJson = function (obj) {
-    var ret = "", buf = [];
+  $hc.toJson = function (obj) {
     if (obj === null) {
-      ret = "null";
-    } else {
-      switch (obj.constructor) {
-      case String:
-        obj = obj.replace('\\', '\\\\')
-                .replace('"', '\\"')
-                .replace('\t', ' ');
-        ret = '"' + obj + '"';
-        break;
-      case Boolean:
-        ret = obj ? "true" : "false";
-        break;
-      case Number:
-        ret = isNaN(obj) || !isFinite(obj) ? "null" : obj.toString();
-        break;
-      case Array:
-        for (var i = 0; i < obj.length; i++) {
-          buf.push(this.toJson(obj[i]));
-        }
-        ret = "[" + buf.join(",") + "]";
-        break;
-      case Object:
-        for (var key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            buf[buf.length] = this.toJson(key) + ":" + this.toJson(obj[key]);
-          }
-        }
-        ret = "{" + buf.join(",") + "}";
-        break;
-      default:
-        ret = "null";
-        break;
-      }
+      return "null";
     }
-    return ret;
-  };
+    switch (obj.constructor) {
+    case String:
+      var mod_text = obj.replace('\\', '\\\\').replace('"', '\\"');
+      return '"' + mod_text + '"';
+    case Boolean:
+      return obj ? "true" : "false";
+    case Number:
+      return obj.toString();
+    case Array:
+      var list = [];
+      for (var index = 0; index < obj.length; index++) {
+        list.push($hc.toJson(obj[index]));
+      }
+      return "[" + list.join(",") + "]";
+    case Object:
+      var list = [];
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          list.push('"' + key + '":' + $hc.toJson(obj[key]));
+        }
+      }
+      return "{" + list.join(",") + "}";
+    default:
+      return "null";
+    }
+  }
   
   $hc.fromJson = function(json_text) {
     var obj = fromJson(json_text);
