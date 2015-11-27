@@ -161,7 +161,7 @@ sessionScope.humcom = sessionScope.humcom || {};
   }
   
   $hc.getDominoTime = function(text) {
-    return I18n.parseDate(text);
+    return I18n.parseDate(text, "ja");
   }
   
   // -------------- Private Method ---------------
