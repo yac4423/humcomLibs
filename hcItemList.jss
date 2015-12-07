@@ -32,7 +32,7 @@ OneItem.prototype = {
     var fields = this.getFields();
     for(var index=0; index < fields.length; index++) {
       var fieldname = fields[index];
-      obj[fieldname] = this[fieldname];
+      obj[fieldname] = this[fieldname].replace('\r\n', '\\r\\n');
     }
     return obj;
   },
@@ -41,7 +41,7 @@ OneItem.prototype = {
     var fields = this.getFields();
     for(var index=0; index < fields.length; index++) {
       var fieldname = fields[index];
-      this[fieldname] = obj[fieldname] || "";
+      this[fieldname] = (obj[fieldname] || "").replace('\\r\\n', '\r\n');
     }
   }
 }

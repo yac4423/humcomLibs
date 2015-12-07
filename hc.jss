@@ -177,7 +177,7 @@ sessionScope.humcom = sessionScope.humcom || {};
     case "number":
       return obj;
     case "string":
-      return "\"" + obj + "\"";
+      return "\"" + obj.replace('\n', '\\n').replace('\r', '\\r') + "\"";
     case "function":
       return obj;
     case "java.util.ArrayList":
