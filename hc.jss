@@ -124,6 +124,26 @@ sessionScope.humcom = sessionScope.humcom || {};
     return fileItems;
   }
   
+  $hc.getAttachFileItemsND = function(back_doc, field_name) {
+    var field:NotesRichTextItem = back_doc.getFirstItem(field_name);
+    if (field === null) {
+      return [];
+    }
+    var items:java.util.Vector = field.getEmbeddedObjects();
+    var unid = back_doc.getUniversalID();
+    var parentDB:NotesDatabase = back_doc.getParentDatabase();
+    var path = parentDB.getFilePath();
+    var fileItems = [];
+    for(var index=0; index<items.length; index++) {
+      var attach_obj = items[index];
+      var file_item = {}
+      file_item.name = attach_obj.getName();
+      file_item.url = "../" + path + "/0/" + unid + "/$FILE/" + file_item.name;
+      fileItems.push(file_item);
+    }
+    return fileItems;
+  }
+  
   $hc.createMailDoc = function(title, sendto) {
     var maildoc = database.createDocument();
     maildoc.replaceItemValue("Form", "Memo");
